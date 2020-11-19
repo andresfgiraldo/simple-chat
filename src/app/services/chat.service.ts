@@ -35,4 +35,15 @@ export class ChatService {
       )
   }
 
+  agregarMensaje(texto: string) {
+    let msg: Mensaje = {
+      nombre: 'And',
+      mensaje: texto,
+      fecha: new Date().getTime(),
+      uid: 'adsjlkajsdkfjalsdj'
+    }
+
+    return this.itemsCollection.add(msg);
+  }
+
 }

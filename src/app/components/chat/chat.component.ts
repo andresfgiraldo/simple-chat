@@ -20,6 +20,16 @@ export class ChatComponent implements OnInit {
   ngOnInit(): void {}
 
   enviarMensaje(){
-    console.log(this.mensaje);
+    if (this.mensaje.length == 0)
+        return;
+
+    this._cs.agregarMensaje(this.mensaje)
+      .then(() => { 
+        console.log("mensaje enviado");
+        this.mensaje = "";
+      })
+      .catch((e) => { console.log("error al guardar", e) })
+
+    return;
   }
 }
