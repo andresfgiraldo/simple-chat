@@ -9,6 +9,7 @@ import { environment } from '../environments/environment';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ChatComponent } from './components/chat/chat.component';
+import { ChatService } from './services/chat.service'
 
 import {FormsModule} from '@angular/forms';
 
@@ -25,7 +26,7 @@ import {FormsModule} from '@angular/forms';
     AngularFirestoreModule,
     FormsModule
   ],
-  providers: [],
+  providers: [ChatService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

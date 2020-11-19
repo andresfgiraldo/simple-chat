@@ -3,18 +3,15 @@
 <hr>
 <div class="app-mensajes">
     
-    <div class="text-right">
-        <span class=" badge badge-primary ">Andrés</span>
-        <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit.</p>
-    </div>
-
-    <div class="text-left">
-        <span class=" badge badge-success ">Cristina</span>
-        <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit.</p>
+    <div class="text-right" *ngFor="let c of _cs.chats">
+        <span class=" badge badge-primary ">{{c.nombre}}</span>
+        <p>{{c.mensaje}}</p>
     </div>
 
 </div>
+
 <hr>
+
 <input type="text" 
         class="form-control"
         [(ngModel)]="mensaje"
