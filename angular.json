@@ -117,8 +117,13 @@
               "devServerTarget": "chat-firebase:serve:production"
             }
           }
+        },
+        "deploy": {
+          "builder": "@angular/fire:deploy",
+          "options": {}
         }
       }
-    }},
+    }
+  },
   "defaultProject": "chat-firebase"
 }
