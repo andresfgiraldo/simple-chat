@@ -15,4 +15,7 @@
 
 </div>
 <hr>
-<input type="text" class="form-control">
+<input type="text" 
+        class="form-control"
+        [(ngModel)]="mensaje"
+        (keyup.enter)="enviarMensaje()">
