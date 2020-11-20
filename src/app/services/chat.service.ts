@@ -4,6 +4,9 @@ import { map } from 'rxjs/operators';
 
 import { Mensaje } from '../interfaces/mensaje.interface';
 
+import { AngularFireAuth } from '@angular/fire/auth';
+import firebase from 'firebase/app';
+
 @Injectable({
   providedIn: 'root'
 })
@@ -12,8 +15,20 @@ export class ChatService {
 
   private itemsCollection: AngularFirestoreCollection<Mensaje>;
   public chats: Mensaje[] = [];
-  
-  constructor(private afs: AngularFirestore) {}
+  public usuario: any = {};
+
+  constructor(private afs: AngularFirestore,
+    public auth: AngularFireAuth) {
+    this.auth.authState.subscribe(user => {
+      console.log(user);
+      if (!user)
+        return;
+
+      this.usuario.nombre = user.displayName;
+      this.usuario.uid = user.uid;
+
+    })
+  }
 
   cargarMensajes() {
     this.itemsCollection = this.afs.collection<Mensaje>('chats', ref => ref.orderBy('fecha', 'desc').limit(100));
@@ -37,13 +52,26 @@ export class ChatService {
 
   agregarMensaje(texto: string) {
     let msg: Mensaje = {
-      nombre: 'And',
+      nombre: this.usuario.nombre,
       mensaje: texto,
       fecha: new Date().getTime(),
-      uid: 'adsjlkajsdkfjalsdj'
+      uid: this.usuario.uid
     }
 
     return this.itemsCollection.add(msg);
+  }
+
+  login(servicio: string) {
+    if (servicio == 'google') {
+      this.auth.signInWithPopup(new firebase.auth.GoogleAuthProvider());
+    } else if (servicio == 'twitter') {
+      this.auth.signInWithPopup(new firebase.auth.TwitterAuthProvider());
+    }
+  }
+
+  logout() {
+    this.usuario = {};
+    this.auth.signOut();
   }
 
 }
