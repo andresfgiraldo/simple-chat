@@ -15,8 +15,6 @@ export class ChatComponent implements OnInit {
   constructor(public _cs: ChatService) {
     this._cs.cargarMensajes().subscribe((mensajes)=>{
       
-      console.log(mensajes);
-      
       setTimeout(() => {
           this.el.scrollTop = this.el.scrollHeight
         }, 20)
@@ -25,7 +23,6 @@ export class ChatComponent implements OnInit {
 
   ngOnInit(): void {
     this.el = document.getElementById('app-mensajes');
-    console.log(this.el)
   }
 
   enviarMensaje(){
@@ -34,7 +31,6 @@ export class ChatComponent implements OnInit {
 
     this._cs.agregarMensaje(this.mensaje)
       .then(() => { 
-        console.log("mensaje enviado");
         this.mensaje = "";
       })
       .catch((e) => { console.log("error al guardar", e) })

@@ -20,7 +20,7 @@ export class ChatService {
   constructor(private afs: AngularFirestore,
     public auth: AngularFireAuth) {
     this.auth.authState.subscribe(user => {
-      console.log(user);
+      
       if (!user)
         return;
 
